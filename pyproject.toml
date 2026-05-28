@@ -1,0 +1,89 @@
+[project]
+name = "rl-groupq"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Diogo Carvalho", email = "20221935@novaims.unl.pt" },
+    { name = "Ricardo Pereira", email = "20250343@novaims.unl.pt" },
+    { name = "Yehor Malakhov", email = "20221691@novaims.unl.pt" },
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "gymnasium>=1.3.0",
+    "icu-sepsis>=2.0.1",
+    "matplotlib>=3.10.9",
+    "numpy>=2.4.6",
+    "pandas>=3.0.3",
+    "polars>=1.41.1",
+    "seaborn>=0.13.2",
+]
+
+[project.optional-dependencies]
+amd = ["torch", "triton-rocm"]
+nvidia = ["torch"]
+
+[project.urls]
+"source" = "https://github.com/lCarvas/RL-GroupQ"
+
+[tool.uv]
+conflicts = [[{ extra = "amd" }, { extra = "nvidia" }]]
+
+[tool.uv.sources]
+torch = [
+    { index = "torch-amd", extra = "amd" },
+    { index = "torch-nvidia", extra = "nvidia" },
+]
+triton-rocm = [{ index = "torch-amd" }]
+
+[[tool.uv.index]]
+name = "torch-nvidia"
+url = "https://download.pytorch.org/whl/cu132"
+explicit = true
+
+[[tool.uv.index]]
+name = "torch-amd"
+url = "https://download.pytorch.org/whl/rocm7.2"
+explicit = true
+
+
+[tool.ruff]
+line-length = 80
+exclude = ["src/envs"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "CPY",
+    "FIX",
+    "COM812",
+    "D100",
+    "D104",
+    "E501",
+    'ERA001',
+    "S101",
+    "TD003",
+    "TRY003",
+    "T201",
+    "W505",
+    "PTH",
+    "EM101",
+    "PLR0913",
+    "PLR2004",
+    "TD002",
+]
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 80
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.flake8-annotations]
+allow-star-arg-any = true
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"

@@ -1,0 +1,9 @@
+dictionaries = ["en_gb"]
+words = [
+    "Carvalho",
+    "Diogo",
+    "Malakhov",
+    "Pereira",
+    "Yehor",
+]
+include_paths = ["**/*.md", "**/*.typ"]
