@@ -14,9 +14,11 @@ dependencies = [
     "icu-sepsis>=2.0.1",
     "matplotlib>=3.10.9",
     "numpy>=2.4.6",
+    "optuna>=4.8.0",
     "pandas>=3.0.3",
     "polars>=1.41.1",
     "seaborn>=0.13.2",
+    "stable-baselines3",
 ]
 
 [project.optional-dependencies]
@@ -35,6 +37,7 @@ torch = [
     { index = "torch-nvidia", extra = "nvidia" },
 ]
 triton-rocm = [{ index = "torch-amd" }]
+stable-baselines3 = { git = "https://github.com/DLR-RM/stable-baselines3" }
 
 [[tool.uv.index]]
 name = "torch-nvidia"
