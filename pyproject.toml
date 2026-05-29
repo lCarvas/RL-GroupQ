@@ -27,32 +27,38 @@ dev = ["ruff>=0.15.15"]
 
 [project.optional-dependencies]
 amd = ["torch", "triton-rocm"]
+cpu = ["torch"]
 nvidia = ["torch"]
 
 [project.urls]
 "source" = "https://github.com/lCarvas/RL-GroupQ"
 
 [tool.uv]
-conflicts = [[{ extra = "amd" }, { extra = "nvidia" }]]
+conflicts = [[{ extra = "amd" }, { extra = "cpu" }, { extra = "nvidia" }]]
 
 [tool.uv.sources]
 torch = [
     { index = "torch-amd", extra = "amd" },
+    { index = "torch-cpu", extra = "cpu" },
     { index = "torch-nvidia", extra = "nvidia" },
 ]
 triton-rocm = [{ index = "torch-amd" }]
 stable-baselines3 = { path = "dependencies/stable_baselines3-2.9.0a2-py3-none-any.whl" }
 
 [[tool.uv.index]]
-name = "torch-nvidia"
-url = "https://download.pytorch.org/whl/cu132"
-explicit = true
-
-[[tool.uv.index]]
 name = "torch-amd"
 url = "https://download.pytorch.org/whl/rocm7.2"
 explicit = true
 
+[[tool.uv.index]]
+name = "torch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "torch-nvidia"
+url = "https://download.pytorch.org/whl/cu132"
+explicit = true
 
 [tool.ruff]
 line-length = 80

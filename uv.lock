@@ -2,12 +2,23 @@ version = 1
 revision = 3
 requires-python = ">=3.14"
 resolution-markers = [
-    "sys_platform == 'win32'",
-    "sys_platform == 'emscripten'",
-    "sys_platform != 'emscripten' and sys_platform != 'win32'",
+    "sys_platform == 'win32' and extra != 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia'",
+    "sys_platform == 'emscripten' and extra != 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia'",
+    "sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia'",
+    "sys_platform == 'win32' and extra != 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform == 'emscripten' and extra != 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform == 'darwin' and extra != 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform == 'win32' and extra == 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform != 'emscripten' and sys_platform != 'win32' and extra == 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform == 'win32' and extra != 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform == 'emscripten' and extra != 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
+    "sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-9-rl-groupq-amd' and extra != 'extra-9-rl-groupq-cpu' and extra != 'extra-9-rl-groupq-nvidia'",
 ]
 conflicts = [[
     { package = "rl-groupq", extra = "amd" },
+    { package = "rl-groupq", extra = "cpu" },
     { package = "rl-groupq", extra = "nvidia" },
 ]]
 
@@ -48,7 +59,7 @@ name = "cffi"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pycparser", marker = "implementation_name != 'PyPy' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "pycparser", marker = "implementation_name != 'PyPy' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/eb/56/b1ba7935a17738ae8453301356628e8147c79dbb825bcbc73dc7401f9846/cffi-2.0.0.tar.gz", hash = "sha256:44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529", size = 523588, upload-time = "2025-09-08T23:24:04.541Z" }
 wheels = [
@@ -99,7 +110,7 @@ name = "colorlog"
 version = "6.10.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a2/61/f083b5ac52e505dfc1c624eafbf8c7589a0d7f32daa398d2e7590efa5fda/colorlog-6.10.1.tar.gz", hash = "sha256:eb4ae5cb65fe7fec7773c2306061a8e63e02efc2c72eba9d27b0fa23c94f1321", size = 17162, upload-time = "2025-10-16T16:14:11.978Z" }
 wheels = [
@@ -419,7 +430,7 @@ name = "ipykernel"
 version = "7.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "appnope", marker = "sys_platform == 'darwin' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "appnope", marker = "sys_platform == 'darwin' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
     { name = "comm" },
     { name = "debugpy" },
     { name = "ipython" },
@@ -443,12 +454,12 @@ name = "ipython"
 version = "9.13.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
     { name = "decorator" },
     { name = "ipython-pygments-lexers" },
     { name = "jedi" },
     { name = "matplotlib-inline" },
-    { name = "pexpect", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (sys_platform == 'win32' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "pexpect", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia') or (sys_platform == 'win32' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (sys_platform == 'win32' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (sys_platform == 'win32' and extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
     { name = "prompt-toolkit" },
     { name = "psutil" },
     { name = "pygments" },
@@ -913,7 +924,7 @@ source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
     { name = "python-dateutil" },
-    { name = "tzdata", marker = "sys_platform == 'emscripten' or sys_platform == 'win32' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "tzdata", marker = "sys_platform == 'emscripten' or sys_platform == 'win32' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/f8/87/4341c6252d1c47b08768c3d25ac487362bf403f0313ddae4a2a26c9b1b4c/pandas-3.0.3.tar.gz", hash = "sha256:696a4a00a2a2a35d4e5deb3fc946641b96c944f02230e4f76137fe35d806c4fc", size = 4651414, upload-time = "2026-05-11T18:54:29.21Z" }
 wheels = [
@@ -949,7 +960,7 @@ name = "pexpect"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ptyprocess", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (sys_platform == 'win32' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "ptyprocess", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (sys_platform == 'emscripten' and extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia') or (sys_platform == 'win32' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (sys_platform == 'win32' and extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (sys_platform == 'win32' and extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/92/cc564bf6381ff43ce1f4d06852fc19a2f11d180f23dc32d9588bee2f149d/pexpect-4.9.0.tar.gz", hash = "sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f", size = 166450, upload-time = "2023-11-25T09:07:26.339Z" }
 wheels = [
@@ -1148,7 +1159,7 @@ name = "pyzmq"
 version = "27.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "implementation_name == 'pypy' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "cffi", marker = "implementation_name == 'pypy' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/04/0b/3c9baedbdf613ecaa7aa07027780b8867f57b6293b6ee50de316c9f3222b/pyzmq-27.1.0.tar.gz", hash = "sha256:ac0765e3d44455adb6ddbf4417dcce460fc40a05978c08efdf2948072f6db540", size = 281750, upload-time = "2025-09-08T23:10:18.157Z" }
 wheels = [
@@ -1196,6 +1207,10 @@ amd = [
     { name = "torch", version = "2.12.0+rocm7.2", source = { registry = "https://download.pytorch.org/whl/rocm7.2" } },
     { name = "triton-rocm" },
 ]
+cpu = [
+    { name = "torch", version = "2.12.0", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "torch", version = "2.12.0+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
+]
 nvidia = [
     { name = "torch", version = "2.12.0+cu132", source = { registry = "https://download.pytorch.org/whl/cu132" } },
 ]
@@ -1218,10 +1233,11 @@ requires-dist = [
     { name = "seaborn", specifier = ">=0.13.2" },
     { name = "stable-baselines3", path = "dependencies/stable_baselines3-2.9.0a2-py3-none-any.whl" },
     { name = "torch", marker = "extra == 'amd'", index = "https://download.pytorch.org/whl/rocm7.2", conflict = { package = "rl-groupq", extra = "amd" } },
+    { name = "torch", marker = "extra == 'cpu'", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "rl-groupq", extra = "cpu" } },
     { name = "torch", marker = "extra == 'nvidia'", index = "https://download.pytorch.org/whl/cu132", conflict = { package = "rl-groupq", extra = "nvidia" } },
     { name = "triton-rocm", marker = "extra == 'amd'", index = "https://download.pytorch.org/whl/rocm7.2" },
 ]
-provides-extras = ["amd", "nvidia"]
+provides-extras = ["amd", "cpu", "nvidia"]
 
 [package.metadata.requires-dev]
 dev = [{ name = "ruff", specifier = ">=0.15.15" }]
@@ -1345,7 +1361,7 @@ name = "sqlalchemy"
 version = "2.0.50"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "greenlet", marker = "platform_machine == 'AMD64' or platform_machine == 'WIN32' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'ppc64le' or platform_machine == 'win32' or platform_machine == 'x86_64' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "greenlet", marker = "platform_machine == 'AMD64' or platform_machine == 'WIN32' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'ppc64le' or platform_machine == 'win32' or platform_machine == 'x86_64' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
     { name = "typing-extensions" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/57/da/6fbf010c8ebb347679d0d100b22fe9ba5e13fd04046c5df7280d2f0bf706/sqlalchemy-2.0.50.tar.gz", hash = "sha256:af5607d11ef90fd6a5c0549fe0045dce1663d427426bcfb506dcb5346a85a3b9", size = 9907424, upload-time = "2026-05-24T19:20:04.018Z" }
@@ -1448,6 +1464,56 @@ wheels = [
 
 [[package]]
 name = "torch"
+version = "2.12.0"
+source = { registry = "https://download.pytorch.org/whl/cpu" }
+resolution-markers = [
+    "sys_platform == 'darwin'",
+]
+dependencies = [
+    { name = "filelock", marker = "sys_platform == 'darwin'" },
+    { name = "fsspec", marker = "sys_platform == 'darwin'" },
+    { name = "jinja2", marker = "sys_platform == 'darwin'" },
+    { name = "networkx", marker = "sys_platform == 'darwin'" },
+    { name = "setuptools", marker = "sys_platform == 'darwin'" },
+    { name = "sympy", marker = "sys_platform == 'darwin'" },
+    { name = "typing-extensions", marker = "sys_platform == 'darwin'" },
+]
+wheels = [
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0-cp314-cp314-macosx_14_0_arm64.whl", hash = "sha256:f7dfae4a519197dfa050e98d8e36378a0fb5899625a875c2b54445005a2e404e", upload-time = "2026-05-12T16:20:26Z" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0-cp314-cp314t-macosx_14_0_arm64.whl", hash = "sha256:b4556715c8572758625d62b6e0ae3b1f76c440221913a6fb5e100f321fb4fb02", upload-time = "2026-05-12T16:20:31Z" },
+]
+
+[[package]]
+name = "torch"
+version = "2.12.0+cpu"
+source = { registry = "https://download.pytorch.org/whl/cpu" }
+resolution-markers = [
+    "sys_platform == 'win32'",
+    "sys_platform == 'emscripten'",
+    "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'win32'",
+]
+dependencies = [
+    { name = "filelock", marker = "sys_platform != 'darwin'" },
+    { name = "fsspec", marker = "sys_platform != 'darwin'" },
+    { name = "jinja2", marker = "sys_platform != 'darwin'" },
+    { name = "networkx", marker = "sys_platform != 'darwin'" },
+    { name = "setuptools", marker = "sys_platform != 'darwin'" },
+    { name = "sympy", marker = "sys_platform != 'darwin'" },
+    { name = "typing-extensions", marker = "sys_platform != 'darwin'" },
+]
+wheels = [
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0%2Bcpu-cp314-cp314-linux_s390x.whl", hash = "sha256:ee1f329acfd0c2a1ccaa3393bcaf9857ea58759549bb2d67e271a6eab42382b3", upload-time = "2026-05-12T23:18:08Z" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0%2Bcpu-cp314-cp314-manylinux_2_28_aarch64.whl", hash = "sha256:797c066367792c92eb97cafba7fd0caa8d7455e6078a4ee880630077378dc372", upload-time = "2026-05-12T23:18:15Z" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0%2Bcpu-cp314-cp314-manylinux_2_28_x86_64.whl", hash = "sha256:a8f419ce3f25388d36e67153ec63b3a1b17059c49f5a7759a7e91ac4843660d3", upload-time = "2026-05-12T23:18:22Z" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0%2Bcpu-cp314-cp314-win_amd64.whl", hash = "sha256:1dd196c43e74e7b3b526ff434e7efbdef3f3792a2efbecfc983d7dce501840d2", upload-time = "2026-05-12T23:18:30Z" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0%2Bcpu-cp314-cp314t-linux_s390x.whl", hash = "sha256:d0d2080cb13c94ebc0c884d237e404490743d0f40192c8a180abf3b6b6f334cf", upload-time = "2026-05-12T23:18:35Z" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0%2Bcpu-cp314-cp314t-manylinux_2_28_aarch64.whl", hash = "sha256:f7bc15972acad257723775237cdd120024cca844b8bc64701822fa596bcb7e14", upload-time = "2026-05-12T23:18:42Z" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0%2Bcpu-cp314-cp314t-manylinux_2_28_x86_64.whl", hash = "sha256:4d79f961250d1763487ecbc90af019a80009f9e87cadc5366b3ec4ba5671fea6", upload-time = "2026-05-12T23:18:50Z" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.12.0%2Bcpu-cp314-cp314t-win_amd64.whl", hash = "sha256:46b8f4c41ac36bb5d5b47f5437b3de5541b313275e59c1d2aefd3bef32b0f531", upload-time = "2026-05-12T23:18:58Z" },
+]
+
+[[package]]
+name = "torch"
 version = "2.12.0+cu132"
 source = { registry = "https://download.pytorch.org/whl/cu132" }
 resolution-markers = [
@@ -1457,7 +1523,7 @@ resolution-markers = [
 ]
 dependencies = [
     { name = "cuda-bindings", marker = "sys_platform == 'linux'" },
-    { name = "cuda-toolkit", extra = ["cublas", "cudart", "cufft", "cufile", "cupti", "curand", "cusolver", "cusparse", "nvjitlink", "nvrtc", "nvtx"], marker = "(sys_platform == 'linux' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "cuda-toolkit", extra = ["cublas", "cudart", "cufft", "cufile", "cupti", "curand", "cusolver", "cusparse", "nvjitlink", "nvrtc", "nvtx"], marker = "(sys_platform == 'linux' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
     { name = "filelock" },
     { name = "fsspec" },
     { name = "jinja2" },
@@ -1526,7 +1592,7 @@ name = "tqdm"
 version = "4.67.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-cpu') or (extra == 'extra-9-rl-groupq-amd' and extra == 'extra-9-rl-groupq-nvidia') or (extra == 'extra-9-rl-groupq-cpu' and extra == 'extra-9-rl-groupq-nvidia')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/09/a9/6ba95a270c6f1fbcd8dac228323f2777d886cb206987444e4bce66338dd4/tqdm-4.67.3.tar.gz", hash = "sha256:7d825f03f89244ef73f1d4ce193cb1774a8179fd96f31d7e1dcde62092b960bb", size = 169598, upload-time = "2026-02-03T17:35:53.048Z" }
 wheels = [
