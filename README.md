@@ -70,3 +70,17 @@ pip install -r "requirements-amd.txt"
 ```bash
 uv sync --extra amd
 ```
+
+### CPU
+
+#### Using pip
+
+```bash
+pip install -r "requirements-cpu.txt"
+```
+
+#### Using uv
+
+```bash
+uv sync --extra cpu
+```
