@@ -20,6 +20,7 @@ dependencies = [
     "polars>=1.41.1",
     "seaborn>=0.13.2",
     "stable-baselines3",
+    "tqdm>=4.67.3",
 ]
 
 [dependency-groups]
@@ -62,7 +63,7 @@ explicit = true
 
 [tool.ruff]
 line-length = 80
-exclude = ["src/envs"]
+exclude = ["src/envs", ".venv"]
 
 [tool.ruff.format]
 docstring-code-format = true

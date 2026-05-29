@@ -1200,6 +1200,7 @@ dependencies = [
     { name = "polars" },
     { name = "seaborn" },
     { name = "stable-baselines3" },
+    { name = "tqdm" },
 ]
 
 [package.optional-dependencies]
@@ -1235,6 +1236,7 @@ requires-dist = [
     { name = "torch", marker = "extra == 'amd'", index = "https://download.pytorch.org/whl/rocm7.2", conflict = { package = "rl-groupq", extra = "amd" } },
     { name = "torch", marker = "extra == 'cpu'", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "rl-groupq", extra = "cpu" } },
     { name = "torch", marker = "extra == 'nvidia'", index = "https://download.pytorch.org/whl/cu132", conflict = { package = "rl-groupq", extra = "nvidia" } },
+    { name = "tqdm", specifier = ">=4.67.3" },
     { name = "triton-rocm", marker = "extra == 'amd'", index = "https://download.pytorch.org/whl/rocm7.2" },
 ]
 provides-extras = ["amd", "cpu", "nvidia"]
