@@ -41,7 +41,7 @@ torch = [
     { index = "torch-nvidia", extra = "nvidia" },
 ]
 triton-rocm = [{ index = "torch-amd" }]
-stable-baselines3 = { git = "https://github.com/DLR-RM/stable-baselines3" }
+stable-baselines3 = { path = "dependencies/stable_baselines3-2.9.0a2-py3-none-any.whl" }
 
 [[tool.uv.index]]
 name = "torch-nvidia"
