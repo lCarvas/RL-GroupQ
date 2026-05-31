@@ -15,7 +15,7 @@ Contents
 import numpy as np
 import gymnasium as gym
 
-from src.envs.env_setup import make_sepsis_env, SOFA_BIAS, LAM
+from envs.env_setup import make_sepsis_env, SOFA_BIAS, LAM
 
 
 #  Wrapper 1: Episodic Observation Noise
@@ -170,7 +170,7 @@ def make_clinical_env(
     You may adjust wrapper parameters for sensitivity analysis, but all
     main results must use the defaults above.
     """
-    from src.envs.continuous_sepsis_env import ContinuousICUSepsisEnv
+    from envs.continuous_sepsis_env import ContinuousICUSepsisEnv
 
     base = ContinuousICUSepsisEnv(params=make_sepsis_env(sofa_bias=sofa_bias, lam=lam))
     env  = EpisodicNoisyObsEnv(base,  malfunction_prob=malfunction_prob, noise_std=noise_std)
