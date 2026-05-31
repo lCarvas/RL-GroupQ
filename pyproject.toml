@@ -18,6 +18,7 @@ dependencies = [
     "optuna>=4.8.0",
     "pandas>=3.0.3",
     "polars>=1.41.1",
+    "rich>=15.0.0",
     "seaborn>=0.13.2",
     "stable-baselines3",
     "tqdm>=4.67.3",
@@ -27,7 +28,7 @@ dependencies = [
 dev = ["ruff>=0.15.15"]
 
 [project.optional-dependencies]
-amd = ["torch", "triton-rocm"]
+amd = ["torch", "pytorch-triton-rocm", "triton-rocm"]
 cpu = ["torch"]
 nvidia = ["torch"]
 
@@ -44,6 +45,7 @@ torch = [
     { index = "torch-nvidia", extra = "nvidia" },
 ]
 triton-rocm = [{ index = "torch-amd" }]
+pytorch-triton-rocm = [{ index = "torch-amd" }]
 stable-baselines3 = { path = "dependencies/stable_baselines3-2.9.0a2-py3-none-any.whl" }
 
 [[tool.uv.index]]
