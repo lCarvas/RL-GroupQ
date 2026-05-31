@@ -20,6 +20,26 @@ class EnvFactory(Protocol):
         ...
 
 
+class EnvFactoryContinuous(Protocol):
+    """
+    Using Protocol to allow for better type hinting as Callable does not
+    support specifying default arguments.
+    """  # noqa: D205
+
+    def __call__(
+        self,
+        sofa_bias: float = ...,
+        lam: float = ...,
+        malfunction_prob: float = ...,
+        noise_std: float = ...,
+        missing_prob: float = ...,
+        n_missing: int = ...,
+        event_prob: float = ...,
+    ) -> gymnasium.Env:
+        """Signature of the environment factory function."""
+        ...
+
+
 def greedy_policy_from_q(
     q_table: np.ndarray[tuple[int, int], np.dtype[np.float64]],
 ) -> np.ndarray[tuple[int, int], np.dtype[np.float64]]:
