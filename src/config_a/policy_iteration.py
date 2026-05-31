@@ -1,7 +1,7 @@
 import numpy as np
 from tqdm import trange
 
-from config_a.utils import greedy_policy_from_q
+from utils import greedy_policy_from_q
 
 
 def policy_evaluation(

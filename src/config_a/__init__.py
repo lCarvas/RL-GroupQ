@@ -8,7 +8,7 @@ from config_a.q_learning import (
     tune_q_learning,
 )
 from config_a.sarsa import objective_sarsa, train_sarsa, tune_sarsa
-from config_a.utils import (
+from utils import (
     EnvFactory,
     evaluate_deterministic_policy,
     greedy_policy_from_q,

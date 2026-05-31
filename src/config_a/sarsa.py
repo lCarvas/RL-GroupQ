@@ -4,12 +4,12 @@ import numpy as np
 import optuna
 from tqdm import trange
 
-from config_a.utils import evaluate_deterministic_policy, greedy_policy_from_q
+from utils import evaluate_deterministic_policy, greedy_policy_from_q
 
 if TYPE_CHECKING:
     import gymnasium
 
-    from config_a.utils import EnvFactory
+    from utils import EnvFactory
 
 
 def train_sarsa(

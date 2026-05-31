@@ -4,7 +4,7 @@ import numpy as np
 import optuna
 from tqdm import trange
 
-from config_a.utils import (
+from utils import (
     EnvFactory,
     evaluate_deterministic_policy,
     greedy_policy_from_q,
