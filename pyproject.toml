@@ -30,19 +30,28 @@ dev = ["ruff>=0.15.15"]
 [project.optional-dependencies]
 amd = ["torch", "pytorch-triton-rocm", "triton-rocm"]
 cpu = ["torch"]
-nvidia = ["torch"]
+nvidia-cu12 = ["torch"]
+nvidia-cu13 = ["torch"]
 
 [project.urls]
 "source" = "https://github.com/lCarvas/RL-GroupQ"
 
 [tool.uv]
-conflicts = [[{ extra = "amd" }, { extra = "cpu" }, { extra = "nvidia" }]]
+conflicts = [
+    [
+        { extra = "amd" },
+        { extra = "cpu" },
+        { extra = "nvidia-cu12" },
+        { extra = "nvidia-cu13" },
+    ],
+]
 
 [tool.uv.sources]
 torch = [
     { index = "torch-amd", extra = "amd" },
     { index = "torch-cpu", extra = "cpu" },
-    { index = "torch-nvidia", extra = "nvidia" },
+    { index = "torch-nvidia-cu12", extra = "nvidia-cu12" },
+    { index = "torch-nvidia-cu13", extra = "nvidia-cu13" },
 ]
 triton-rocm = [{ index = "torch-amd" }]
 pytorch-triton-rocm = [{ index = "torch-amd" }]
@@ -59,7 +68,12 @@ url = "https://download.pytorch.org/whl/cpu"
 explicit = true
 
 [[tool.uv.index]]
-name = "torch-nvidia"
+name = "torch-nvidia-cu12"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[[tool.uv.index]]
+name = "torch-nvidia-cu13"
 url = "https://download.pytorch.org/whl/cu132"
 explicit = true
 

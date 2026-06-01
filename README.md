@@ -20,16 +20,26 @@ Python versions could lead to unexpected errors.
 
 ### NVIDIA GPUs
 
+Choose depending on your installed CUDA version.
+
 #### Using pip
 
 ```bash
-pip install -r "requirements-nvidia.txt"
+pip install -r "requirements-nvidia-cu12.txt"
+```
+
+```bash
+pip install -r "requirements-nvidia-cu13.txt"
 ```
 
 #### Using uv
 
 ```bash
-uv sync --extra nvidia
+uv sync --extra nvidia-cu12
+```
+
+```bash
+uv sync --extra nvidia-cu13
 ```
 
 ### AMD GPUs
