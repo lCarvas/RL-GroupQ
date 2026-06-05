@@ -1,9 +1,41 @@
 dictionaries = ["en_gb"]
 words = [
     "Carvalho",
+    "DQN",
     "Diogo",
+    "INVERTIBLE",
+    "Komorowski",
+    "MDP",
     "Malakhov",
+    "Mnih",
+    "PPO",
+    "Parzen",
     "Pereira",
+    "Polyak",
+    "SARSA",
+    "TPE",
     "Yehor",
+    "coef",
+    "cuda",
+    "dysregulated",
+    "einsum",
+    "ent",
+    "gae",
+    "hyperparameters",
+    "mps",
+    "ndarray",
+    "optuna",
+    "pyright",
+    "subclasses",
+    "tqdm",
+    "vasopressor",
 ]
-include_paths = ["**/*.md", "**/*.typ"]
+include_paths = [
+    "**/*.md",
+    "**/*.typ",
+    "**/*.py",
+]
+include_tags = [
+    "comment",
+    "string",
+]

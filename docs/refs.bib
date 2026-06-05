@@ -1,0 +1,129 @@
+@article{stable-baselines3,
+  author  = {Antonin Raffin and Ashley Hill and Adam Gleave and Anssi Kanervisto and Maximilian Ernestus and Noah Dormann},
+  title   = {Stable-Baselines3: Reliable Reinforcement Learning Implementations},
+  journal = {Journal of Machine Learning Research},
+  year    = {2021},
+  volume  = {22},
+  number  = {268},
+  pages   = {1-8},
+  url     = {https://jmlr.org/papers/v22/20-1364.html}
+}
+
+@misc{stable-baselines3-docs,
+  author  = {Stable Baselines3 Team},
+  title   = {Stable-Baselines3 Documentation},
+  url     = {https://stable-baselines3.readthedocs.io/en/master/},
+  urldate = {2026-06-01}
+}
+
+@inproceedings{choudhary2024icusepsis,
+  title     = {{ICU-Sepsis}: A Benchmark {MDP} Built from Real Medical Data},
+  author    = {Kartik Choudhary and Dhawal Gupta and Philip S. Thomas},
+  booktitle = {Reinforcement Learning Conference},
+  year      = {2024},
+  url       = {https://arxiv.org/abs/2406.05646}
+}
+
+@inproceedings{rl-sepsis-treatment,
+  title     = {Reinforcement Learning For Sepsis Treatment: A Continuous Action Space Solution},
+  author    = {Huang, Yong and Cao, Rui and Rahmani, Amir},
+  booktitle = {Proceedings of the 7th Machine Learning for Healthcare Conference},
+  pages     = {631--647},
+  year      = {2022},
+  editor    = {Lipton, Zachary and Ranganath, Rajesh and Sendak, Mark and Sjoding, Michael and Yeung, Serena},
+  volume    = {182},
+  series    = {Proceedings of Machine Learning Research},
+  month     = {05--06 Aug},
+  publisher = {PMLR},
+  pdf       = {https://proceedings.mlr.press/v182/huang22a/huang22a.pdf},
+  url       = {https://proceedings.mlr.press/v182/huang22a.html},
+  abstract  = {Sepsis is the leading cause of death in intensive care units. It is challenging to treat sepsis because the optimal treatment is still unclear, and individual patients respond differently to treatments. Recent attempts to use reinforcement learning to provide real-time personalized treatment recommendations have shown promising results. However, the discrete action design (i.e., discretizing the continuum of action space into coarse-grained decisions) poses problems in policy learning and evaluation, and limits the effectiveness of the treatment recommendations. In this work, we proposed a continuous state and action space solution inspired by the Deep Deterministic Policy Gradient (DDPG) algorithm. We performed qualitative evaluations and applied the direct method for off-policy evaluations. Our results match clinician performance and are more clinically reasonable and explainable than the state of the art.}
+}
+
+@article{sepsis-pathophysiology,
+  author   = {Jarczak, Dominik  and Kluge, Stefan  and Nierhaus, Axel },
+  title    = {Sepsis—Pathophysiology and Therapeutic Concepts},
+  journal  = {Frontiers in Medicine},
+  volume   = {Volume 8 - 2021},
+  year     = {2021},
+  url      = {https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2021.628302},
+  doi      = {10.3389/fmed.2021.628302},
+  issn     = {2296-858X},
+  abstract = {Sepsis is a life-threatening condition and a global disease burden. Today, the heterogeneous syndrome is defined as severe organ dysfunction caused by a dysregulated host response to infection, with renewed emphasis on immune pathophysiology. Despite all efforts of experimental and clinical research during the last three decades, the ability to positively influence course and outcome of the syndrome remains limited. Evidence-based therapy still consists of basic causal and supportive measures, while adjuvant interventions such as blood purification or targeted immunotherapy largely remain without proof of effectiveness so far.
+              With this review, we aim to provide an overview of sepsis immune pathophysiology, to update the choice of therapeutic approaches targeting different immunological mechanisms in the course of sepsis and septic shock, and to call for a paradigm shift from the pathogen to the host response as a potentially more promising angle.}
+}
+
+@inproceedings{optuna,
+  author    = {Akiba, Takuya and Sano, Shotaro and Yanase, Toshihiko and Ohta, Takeru and Koyama, Masanori},
+  title     = {Optuna: A Next-generation Hyperparameter Optimization Framework},
+  year      = {2019},
+  isbn      = {9781450362016},
+  publisher = {Association for Computing Machinery},
+  address   = {New York, NY, USA},
+  url       = {https://doi.org/10.1145/3292500.3330701},
+  doi       = {10.1145/3292500.3330701},
+  abstract  = {The purpose of this study is to introduce new design-criteria for next-generation hyperparameter optimization software. The criteria we propose include (1) define-by-run API that allows users to construct the parameter search space dynamically, (2) efficient implementation of both searching and pruning strategies, and (3) easy-to-setup, versatile architecture that can be deployed for various purposes, ranging from scalable distributed computing to light-weight experiment conducted via interactive interface. In order to prove our point, we will introduce Optuna, an optimization software which is a culmination of our effort in the development of a next generation optimization software. As an optimization software designed with define-by-run principle, Optuna is particularly the first of its kind. We will present the design-techniques that became necessary in the development of the software that meets the above criteria, and demonstrate the power of our new design through experimental results and real world applications. Our software is available under the MIT license (https://github.com/pfnet/optuna/).},
+  booktitle = {Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+  pages     = {2623-2631},
+  numpages  = {9},
+  keywords  = {machine learning system, hyperparameter optimization, black-box optimization, Bayesian optimization},
+  location  = {Anchorage, AK, USA},
+  series    = {KDD '19}
+}
+
+@article{Komorowski2018,
+  author   = {Komorowski, Matthieu
+              and Celi, Leo A.
+              and Badawi, Omar
+              and Gordon, Anthony C.
+              and Faisal, A. Aldo},
+  title    = {The Artificial Intelligence Clinician learns optimal treatment strategies for sepsis in intensive care},
+  journal  = {Nature Medicine},
+  year     = {2018},
+  month    = {Nov},
+  day      = {01},
+  volume   = {24},
+  number   = {11},
+  pages    = {1716-1720},
+  abstract = {Sepsis is the third leading cause of death worldwide and the main cause of mortality in hospitals1--3, but the best treatment strategy remains uncertain. In particular, evidence suggests that current practices in the administration of intravenous fluids and vasopressors are suboptimal and likely induce harm in a proportion of patients1,4--6. To tackle this sequential decision-making problem, we developed a reinforcement learning agent, the Artificial Intelligence (AI) Clinician, which extracted implicit knowledge from an amount of patient data that exceeds by many-fold the life-time experience of human clinicians and learned optimal treatment by analyzing a myriad of (mostly suboptimal) treatment decisions. We demonstrate that the value of the AI Clinician's selected treatment is on average reliably higher than human clinicians. In a large validation cohort independent of the training data, mortality was lowest in patients for whom clinicians' actual doses matched the AI decisions. Our model provides individualized and clinically interpretable treatment decisions for sepsis that could improve patient outcomes.},
+  issn     = {1546-170X},
+  doi      = {10.1038/s41591-018-0213-5},
+  url      = {https://doi.org/10.1038/s41591-018-0213-5}
+}
+
+@article{qlearning-paper,
+  author   = {Watkins, Christopher J. C. H.
+              and Dayan, Peter},
+  title    = {Q-learning},
+  journal  = {Machine Learning},
+  year     = {1992},
+  month    = {May},
+  day      = {01},
+  volume   = {8},
+  number   = {3},
+  pages    = {279-292},
+  abstract = {Q-learning (Watkins, 1989) is a simple way for agents to learn how to act optimally in controlled Markovian domains. It amounts to an incremental method for dynamic programming which imposes limited computational demands. It works by successively improving its evaluations of the quality of particular actions at particular states.},
+  issn     = {1573-0565},
+  doi      = {10.1007/BF00992698},
+  url      = {https://doi.org/10.1007/BF00992698}
+}
+
+@misc{dqn-paper,
+  title         = {Playing Atari with Deep Reinforcement Learning},
+  author        = {Volodymyr Mnih and Koray Kavukcuoglu and David Silver and Alex Graves and Ioannis Antonoglou and Daan Wierstra and Martin Riedmiller},
+  year          = {2013},
+  eprint        = {1312.5602},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/1312.5602}
+}
+
+@misc{ppo-paper,
+  title         = {Proximal Policy Optimization Algorithms},
+  author        = {John Schulman and Filip Wolski and Prafulla Dhariwal and Alec Radford and Oleg Klimov},
+  year          = {2017},
+  eprint        = {1707.06347},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.LG},
+  url           = {https://arxiv.org/abs/1707.06347}
+}
