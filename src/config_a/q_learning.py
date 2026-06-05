@@ -2,7 +2,6 @@ from typing import TYPE_CHECKING, cast
 
 import numpy as np
 import optuna
-from tqdm import trange
 
 from utils import (
     EnvFactory,
@@ -19,16 +18,16 @@ def train_q_learning(
     n_states: int,
     n_actions: int,
     gamma: float,
-    episodes: int = 10_000,
+    episodes: int = 20000,
     alpha: float = 0.1,
     epsilon_start: float = 1.0,
     epsilon_end: float = 0.05,
-    epsilon_decay: float = 0.9995,
+    exploration_fraction: float = 0.15,
     seed: int = 42,
-    progress_desc: str = "Q-learning training",
 ) -> tuple[
     np.ndarray[tuple[int, int], np.dtype[np.float64]],
     np.ndarray[tuple[int], np.dtype[np.float64]],
+    np.ndarray[tuple[int], np.dtype[np.int32]],
 ]:
     """Tabular Q-learning.
 
@@ -43,27 +42,26 @@ def train_q_learning(
     gamma : float
         The discount factor
     episodes : int, optional
-        Number of episodes to train for, by default 10_000
+        Number of episodes to train for, by default 20000
     alpha : float, optional
         Learning rate, by default 0.1
     epsilon_start : float, optional
         Initial exploration rate, by default 1.0
     epsilon_end : float, optional
         Minimum exploration rate, by default 0.05
-    epsilon_decay : float, optional
-        Exploration decay rate, by default 0.9995
+    exploration_fraction : float, optional
+        Fraction of episodes over which to decay epsilon, by default 0.15
     seed : int, optional
         Random seed, by default 42
-    progress_desc : str, optional
-        Description for tqdm, by default "Q-learning training"
 
     Returns
     -------
     tuple[
         np.ndarray[tuple[int, int], np.dtype[np.float64]],
         np.ndarray[tuple[int], np.dtype[np.float64]],
+        np.ndarray[tuple[int], np.dtype[np.int32]],
     ]
-        The trained Q-table and episode returns
+        The trained Q-table, episode returns, and episode lengths
     """
     rng: np.random.Generator = np.random.default_rng(seed)
     q_table: np.ndarray[tuple[int, int], np.dtype[np.float64]] = np.zeros(
@@ -72,12 +70,20 @@ def train_q_learning(
     returns: np.ndarray[tuple[int], np.dtype[np.float64]] = np.zeros(
         episodes, dtype=np.float64
     )
+    lengths: np.ndarray[tuple[int], np.dtype[np.int32]] = np.zeros(
+        episodes, dtype=np.int32
+    )
+
+    epsilon_decay: float = (epsilon_end / epsilon_start) ** (
+        1.0 / (exploration_fraction * episodes)
+    )
     epsilon: float = epsilon_start
 
-    for episode in trange(episodes, desc=progress_desc):
-        obs, _ = env.reset(seed=int(rng.integers(1_000_000_000)))
+    for episode in range(episodes):
+        obs, _ = env.reset(seed=seed + episode)
         done = False
         total_reward = 0.0
+        steps = 0
 
         while not done:
             state = int(obs)
@@ -91,17 +97,21 @@ def train_q_learning(
             next_state = int(next_obs)
 
             target = (
-                reward if done else reward + gamma * np.max(q_table[next_state])
+                reward
+                if terminated
+                else reward + gamma * np.max(q_table[next_state])
             )
             q_table[state, action] += alpha * (target - q_table[state, action])
 
             total_reward += cast("float", reward)
             obs = next_obs
+            steps += 1
 
+        lengths[episode] = steps
         returns[episode] = total_reward
         epsilon = max(epsilon_end, epsilon * epsilon_decay)
 
-    return q_table, returns
+    return q_table, returns, lengths
 
 
 def objective_q_learning(
@@ -110,10 +120,10 @@ def objective_q_learning(
     n_states: int,
     n_actions: int,
     gamma: float,
-    train_episodes: int = 20_000,
-    validation_episodes: int = 10_000,
+    train_episodes: int = 20000,
+    validation_episodes: int = 10000,
     seed: int = 42,
-) -> np.float64:
+) -> tuple[np.float64, np.float64]:
     """Objective function for tuning Q-learning with Optuna.
 
     Parameters
@@ -129,9 +139,9 @@ def objective_q_learning(
     gamma : float
         The discount factor
     train_episodes : int, optional
-        The number of episodes to train for, by default 20_000
+        The number of episodes to train for, by default 20000
     validation_episodes : int, optional
-        The number of episodes to validate for, by default 10_000
+        The number of episodes to validate for, by default 10000
     seed : int, optional
         The random seed, by default 42
 
@@ -140,13 +150,13 @@ def objective_q_learning(
     float
         The mean validation return
     """
-    alpha = trial.suggest_float("alpha", 0.005, 0.5, log=True)
-    epsilon_end = trial.suggest_float("epsilon_end", 0.01, 0.2, log=True)
-    epsilon_decay = trial.suggest_float("epsilon_decay", 0.7, 0.99995)
+    alpha = trial.suggest_float("alpha", 1e-5, 0.5, log=True)
+    epsilon_end = trial.suggest_float("epsilon_end", 1e-4, 0.1, log=True)
+    exploration_fraction = trial.suggest_float("exploration_fraction", 0.0, 1.0)
 
     train_env = env_factory()
     try:
-        q_table, _ = train_q_learning(
+        q_table, _, _ = train_q_learning(
             train_env,
             n_states=n_states,
             n_actions=n_actions,
@@ -155,9 +165,8 @@ def objective_q_learning(
             alpha=alpha,
             epsilon_start=1.0,
             epsilon_end=epsilon_end,
-            epsilon_decay=epsilon_decay,
+            exploration_fraction=exploration_fraction,
             seed=seed,
-            progress_desc=f"Q-learning trial {trial.number + 1}",
         )
     finally:
         train_env.close()
@@ -174,7 +183,10 @@ def objective_q_learning(
     finally:
         validation_env.close()
 
-    return np.mean(validation_returns, dtype=np.float64)
+    return (
+        np.mean(validation_returns, dtype=np.float64),
+        np.mean(validation_returns > 0, dtype=np.float64),
+    )
 
 
 def tune_q_learning(
@@ -183,8 +195,8 @@ def tune_q_learning(
     n_actions: int,
     gamma: float,
     n_trials: int = 10,
-    train_episodes: int = 20_000,
-    validation_episodes: int = 10_000,
+    train_episodes: int = 20000,
+    validation_episodes: int = 10000,
     seed: int = 42,
 ) -> optuna.Study:
     """Tune Q-learning hyperparameters using Optuna.
@@ -202,9 +214,9 @@ def tune_q_learning(
     n_trials : int, optional
         The number of trials to run, by default 8
     train_episodes : int, optional
-        The number of episodes to train for, by default 2_000
+        The number of episodes to train for, by default 20000
     validation_episodes : int, optional
-        The number of episodes to validate for, by default 200
+        The number of episodes to validate for, by default 10000
     seed : int, optional
         The random seed, by default 42
 
@@ -214,7 +226,9 @@ def tune_q_learning(
         The optimised study object
     """
     sampler = optuna.samplers.TPESampler(seed=seed)
-    study = optuna.create_study(direction="maximize", sampler=sampler)
+    study = optuna.create_study(
+        directions=["maximize", "maximize"], sampler=sampler
+    )
 
     study.optimize(
         lambda trial: objective_q_learning(
