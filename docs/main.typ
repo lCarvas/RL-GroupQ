@@ -13,7 +13,8 @@
 }
 
 #show: ilm.with(
-  title: [Reinforcement Learning Group Q],
+  title: [Reinforcement Learning#linebreak()#linebreak()Treating Sepsis with Reinforcement
+    Learning#linebreak()#linebreak() Group Q],
   authors: (
     "Diogo Carvalho - 20221935",
     "Ricardo Pereira - 20250343",
