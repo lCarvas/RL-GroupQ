@@ -6,6 +6,19 @@
 - Ricardo Pereira - 20250343
 - Yehor Malakhov - 20221691
 
+## Repository Structure
+
+- src/config_a.ipynb: Notebook running config a
+- src/config_b.ipynb: Notebook running config b
+- src/plots.ipynb: Notebook containing the code for generating the plots used in
+  the report
+- src/config_a: Folder containing functions related to the algorithms used in
+  config a
+- src/config_b: Folder containing functions related to the algorithms used in
+  config b
+- src/utils: Folder containing functions used in more than one algorithm in
+  either config a or b
+
 ## Installation
 
 If you're using pip, create a virtual environment with Python 3.14 before
